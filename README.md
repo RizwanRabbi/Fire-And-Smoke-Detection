@@ -18,7 +18,7 @@ This document provides details about the datasets and parameters used for traini
 
 - **DataSet 1** : [Fire-detection-v3-6](https://universe.roboflow.com/touatimed2/fire-detection-v3-or0i1)
 - **DataSet 2** : [Fire-Detection-1](https://universe.roboflow.com/situational-awarnessinnovsense/fire-detection-ypseh)
-- **DataSet 3** : [Fire-and-Smoke-Detection-1](universe.roboflow.com/adib-ga0ow/fire-and-smoke-detection-jngig)
+- **DataSet 3** : [Fire-and-Smoke-Detection-1](https://universe.roboflow.com/adib-ga0ow/fire-and-smoke-detection-jngig)
 
 These datasets are taken from the Ultralytics website. Download code in **.ipynb** file
 
