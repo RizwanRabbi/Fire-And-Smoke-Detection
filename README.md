@@ -102,7 +102,7 @@ pip install --upgrade pip
 
 
 #### Install CUDA 
-#### Follow the installation instructions from https://developer.nvidia.com/cuda-downloads
+#### Follow the installation instructions from : https://developer.nvidia.com/cuda-downloads
 
 #### Rest of the Dependencies for Model
 ```bash
