@@ -12,7 +12,7 @@ This document provides details about the datasets and parameters used for traini
 - [Model Dependencies](#model-dependencies)
 - [Application Overview](#application-overview)
 - [Application Dependencies](#application-dependencies)
-- [Running the Application](#running-the-application)
+- [Running the Application](#running-the--application)
 - [Setting Model for Application](#setting-model-for-application)
 - [References](#references)
 
