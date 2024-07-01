@@ -56,7 +56,7 @@ These datasets are taken from the Ultralytics website. Download code in **.ipynb
 ## Project Naming Convention
 In the Results Folder $D_i E _n$ Indicates the $i$-th Dataset trained for $n$-epochs
 
-And later adding freeze, named the folder $D_i E _n F_m$ where the m denoted the number of layers being 
+And later adding freeze, named the folder $D_i E _n F_m$ where the m denoted the number of layers being freezed
 
 ## Model Dependencies
 <details>
