@@ -6,6 +6,7 @@ from PyQt5.QtCore import QTimer, pyqtSignal, QThread
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QProgressBar, QVBoxLayout, QHBoxLayout, QWidget, QMessageBox, QSpacerItem, QSizePolicy, QFileDialog, QLabel
 from PyQt5.QtGui import QPixmap, QImage
 from ultralytics import YOLO
+
 class VideoProcessingThread(QThread):
     progress_updated = pyqtSignal(int)
     processing_finished = pyqtSignal(str)
@@ -209,11 +210,12 @@ class MainWindow(QMainWindow):
         if not self.capture:
             try:
                 self.model = YOLO("yoloD1E100.pt")  # Initialize YOLO model
+                
                 self.capture = cv2.VideoCapture(0)  # Open webcam
 
                 # Start timer to read frames
                 self.timer.timeout.connect(self.display_webcam)
-                self.timer.start(30)  # Update frame every 30 milliseconds
+                self.timer.start(100)  # Update frame every 30 milliseconds
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"Failed to initialize YOLOv5 model: {str(e)}")
 
@@ -237,12 +239,23 @@ class MainWindow(QMainWindow):
             # Perform inference with YOLO model
             results = self.model(source=0, show=True)  # Adjust size if needed
             
-            # Draw bounding boxes on the frame
-            for box in results.xyxy[0]:
-                x1, y1, x2, y2, conf, cls = box.tolist()
-                cv2.rectangle(frame, (int(x1), int(y1)), (int(x2), int(y2)), (255, 0, 0), 2)
-                cv2.putText(frame, f"{self.model.names[int(cls)]}: {conf:.2f}", (int(x1), int(y1) - 10),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 2)
+            # print(results.shape)
+            # # Draw bounding boxes on the frame
+
+             # Draw bounding boxes and labels on the frame
+            for result in results:
+                for box in result.boxes:
+                    x1, y1, x2, y2 = map(int, box.xyxy[0])  # Coordinates
+                    cv2.rectangle(frame, (int(x1), int(y1)), (int(x2), int(y2)), (255, 0, 0), 2)
+                    cv2.putText(frame, f"{self.model.names[int(cls)]}: {conf:.2f}", (int(x1), int(y1) - 10),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 2)
+
+            # for box in results.xyxy[0]:
+            #     x1, y1, x2, y2, conf, cls = box.tolist()
+            #     results.
+            #     cv2.rectangle(frame, (int(x1), int(y1)), (int(x2), int(y2)), (255, 0, 0), 2)
+            #     cv2.putText(frame, f"{self.model.names[int(cls)]}: {conf:.2f}", (int(x1), int(y1) - 10),
+            #                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 2)
             
             # Convert frame to QImage
             height, width, channel = frame.shape
